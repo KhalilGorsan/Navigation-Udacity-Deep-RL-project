@@ -16,6 +16,7 @@ class BananaWrapper:
         self.agents_number = len(env_info.agents)
         state = env_info.vector_observations[0]
         self.state_size = len(state)
+        self.action_size = len(env_info.previous_vector_actions[0])
         return state
 
     def step(self, action):
