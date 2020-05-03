@@ -68,8 +68,9 @@ def dqn(
 def main():
 
     env = BananaWrapper(file_name="./Banana")
-    _ = env.reset()
-    agent = Agent(state_size=env.state_size, action_size=env.action_size, seed=0)
+    state_size = env.observation_size
+    action_size = env.action_size
+    agent = Agent(state_size=state_size, action_size=action_size, seed=0)
     scores = dqn(env, agent)
 
 

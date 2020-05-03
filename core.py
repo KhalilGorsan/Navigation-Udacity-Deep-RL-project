@@ -13,10 +13,7 @@ class BananaWrapper:
 
     def reset(self):
         env_info = self.env.reset(train_mode=True)[self.brain_name]
-        self.agents_number = len(env_info.agents)
         state = env_info.vector_observations[0]
-        self.state_size = len(state)
-        self.action_size = len(env_info.previous_vector_actions[0])
         return state
 
     def step(self, action):
@@ -28,9 +25,9 @@ class BananaWrapper:
         return next_state, reward, done
 
     @property
-    def action_space(self):
-        return self.brain.action_space
+    def action_size(self):
+        return self.brain.vector_action_space_size
 
     @property
-    def observation_space(self):
-        return self.brain.observation_space
+    def observation_size(self):
+        return self.brain.vector_observation_space_size
