@@ -4,6 +4,7 @@ from core import BananaWrapper
 from collections import deque
 import numpy as np
 import torch
+import matplotlib.pyplot as plt
 
 
 def dqn(
@@ -54,7 +55,7 @@ def dqn(
                     i_episode, np.mean(scores_window)
                 )
             )
-        if np.mean(scores_window) >= 25.0:
+        if np.mean(scores_window) >= 30.0:
             print(
                 "\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
                     i_episode - 100, np.mean(scores_window)
@@ -67,11 +68,25 @@ def dqn(
 
 def main():
 
+    # plot the scores
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    double = [False, True]
+    label = ["DQN", "Dueling DQN"]
     env = BananaWrapper(file_name="./Banana")
-    state_size = env.observation_size
-    action_size = env.action_size
-    agent = Agent(state_size=state_size, action_size=action_size, double=True)
-    scores = dqn(env, agent)
+
+    for i in range(2):
+        state_size = env.observation_size
+        action_size = env.action_size
+        agent = Agent(state_size=state_size, action_size=action_size, double=double[i])
+        scores = dqn(env, agent)
+        ax.plot(np.arange(len(scores)), scores, label=label[i])
+        print("\n")
+
+    plt.ylabel("Score")
+    plt.xlabel("Episode #")
+    ax.legend(loc="upper center", shadow=True, fontsize="x-large")
+    plt.show()
 
 
 if __name__ == "__main__":
