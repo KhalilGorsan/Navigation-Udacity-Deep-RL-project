@@ -70,7 +70,7 @@ def main():
     env = BananaWrapper(file_name="./Banana")
     state_size = env.observation_size
     action_size = env.action_size
-    agent = Agent(state_size=state_size, action_size=action_size, double=True, seed=0)
+    agent = Agent(state_size=state_size, action_size=action_size, double=True)
     scores = dqn(env, agent)
 
 
