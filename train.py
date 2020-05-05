@@ -54,7 +54,7 @@ def dqn(
                     i_episode, np.mean(scores_window)
                 )
             )
-        if np.mean(scores_window) >= 13.0:
+        if np.mean(scores_window) >= 25.0:
             print(
                 "\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
                     i_episode - 100, np.mean(scores_window)
@@ -70,7 +70,7 @@ def main():
     env = BananaWrapper(file_name="./Banana")
     state_size = env.observation_size
     action_size = env.action_size
-    agent = Agent(state_size=state_size, action_size=action_size, seed=0)
+    agent = Agent(state_size=state_size, action_size=action_size, double=True, seed=0)
     scores = dqn(env, agent)
 
 
