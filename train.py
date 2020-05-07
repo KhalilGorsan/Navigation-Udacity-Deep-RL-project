@@ -18,6 +18,7 @@ FLAGS = flags.FLAGS
 def dqn(
     env,
     agent,
+    label,
     n_episodes=2000,
     max_t=1000,
     eps_start=1.0,
@@ -69,7 +70,9 @@ def dqn(
                     i_episode - 100, np.mean(scores_window)
                 )
             )
-            torch.save(agent.qnetwork_local.state_dict(), "checkpoint.pth")
+            torch.save(
+                agent.qnetwork_local.state_dict(), "checkpoint_" + str(label) + ".pth"
+            )
             break
     return scores
 
@@ -94,7 +97,7 @@ def main(unused_argv):
     agent = Agent(
         state_size=state_size, action_size=action_size, double=double, dueling=dueling
     )
-    scores = dqn(env, agent, **training)
+    scores = dqn(env=env, agent=agent, label=label, **training)
     ax.plot(np.arange(len(scores)), scores, label=label)
 
     plt.ylabel("Score")
