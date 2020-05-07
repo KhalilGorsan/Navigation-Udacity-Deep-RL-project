@@ -2,9 +2,17 @@ from dqn_agent import Agent
 from core import BananaWrapper
 
 from collections import deque
+from absl import app, flags
 import numpy as np
 import torch
 import matplotlib.pyplot as plt
+
+from utils import extract_configs
+
+flags.DEFINE_multi_string(
+    "config", None, "Filename containing the config for dqn agent."
+)
+FLAGS = flags.FLAGS
 
 
 def dqn(
@@ -66,29 +74,37 @@ def dqn(
     return scores
 
 
-def main():
+def main(unused_argv):
+    del unused_argv
+
+    configs = extract_configs(*FLAGS.config)
+    exp_id = configs["exp_id"]
+    training = configs["training"]
+    double = configs["agent"]["double"]
+    dueling = configs["agent"]["dueling"]
+    label = configs["agent"]
 
     # plot the scores
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    double = [False, True]
-    label = ["DQN", "Dueling DQN"]
     env = BananaWrapper(file_name="./Banana")
 
-    for i in range(2):
-        state_size = env.observation_size
-        action_size = env.action_size
-        agent = Agent(state_size=state_size, action_size=action_size, double=double[i])
-        scores = dqn(env, agent)
-        ax.plot(np.arange(len(scores)), scores, label=label[i])
-        print("\n")
+    state_size = env.observation_size
+    action_size = env.action_size
+    agent = Agent(
+        state_size=state_size, action_size=action_size, double=double, dueling=dueling
+    )
+    scores = dqn(env, agent, **training)
+    ax.plot(np.arange(len(scores)), scores, label=label)
 
     plt.ylabel("Score")
     plt.xlabel("Episode #")
-    ax.legend(loc="upper center", shadow=True, fontsize="x-large")
+    ax.legend(loc="upper center", shadow=True, fontsize="small")
     plt.show()
+    plt.savefig("experiments/config_" + str(exp_id))
 
 
 if __name__ == "__main__":
-    main()
+    flags.mark_flag_as_required("config")
+    app.run(main)
 
