@@ -1,5 +1,6 @@
+exp_id: 0
 agent:
-  name: DQN
+  name: VanillaDQN
   double: false
   dueling: false
   buffer_size: 1e5
@@ -13,9 +14,9 @@ batch_size: 64
 gamma: 0.99
 tau: 1e-3
 update_every: 4
-eps_greedy:
+training:
   eps_start: 1.0
   eps_end: 0.001
   eps_decay: 0.995
-n_episodes: 2000
-max_t: 1000
+  n_episodes: 2000
+  max_t: 1000
