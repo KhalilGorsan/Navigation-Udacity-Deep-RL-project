@@ -30,7 +30,16 @@ class QNetwork(nn.Module):
 
 
 class DuelingDQN(nn.Module):
+    """Actor Model with two separate streams.
+    """
     def __init__(self, state_size, action_size, seed=0):
+        """
+        Params
+        ======
+            state_size (int): Dimension of each state
+            action_size (int): Dimension of each action
+            seed (int): Random seed
+        """
         super(DuelingDQN, self).__init__()
         self.input_dim = state_size
         self.output_dim = action_size
@@ -41,11 +50,11 @@ class DuelingDQN(nn.Module):
             nn.Linear(128, 128),
             nn.ReLU(),
         )
-
+        # value stream
         self.value_stream = nn.Sequential(
             nn.Linear(128, 128), nn.ReLU(), nn.Linear(128, 1)
         )
-
+        # advantage stream
         self.advantage_stream = nn.Sequential(
             nn.Linear(128, 128), nn.ReLU(), nn.Linear(128, self.output_dim)
         )
@@ -54,6 +63,7 @@ class DuelingDQN(nn.Module):
         features = self.feature_layer(state)
         values = self.value_stream(features)
         advantages = self.advantage_stream(features)
+        # Compute Q values by solving the identifiability issue
         qvals = values + (advantages - advantages.mean())
 
         return qvals
