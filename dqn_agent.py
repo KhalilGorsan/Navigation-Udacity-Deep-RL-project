@@ -6,7 +6,7 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-from model import QNetwork
+from model import QNetwork, DuelingDQN
 
 BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 64  # minibatch size
@@ -21,7 +21,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class Agent:
     """Interacts with and learns from the environment."""
 
-    def __init__(self, state_size, action_size, double=False, seed=0):
+    def __init__(self, state_size, action_size, double=False, dueling=False, seed=0):
         """Initialize an Agent object.
 
         Params
@@ -34,10 +34,15 @@ class Agent:
         self.action_size = action_size
         self.seed = random.seed(seed)
         self.double = double
+        self.dueling = dueling
 
         # Q-Network
-        self.qnetwork_local = QNetwork(state_size, action_size, seed).to(device)
-        self.qnetwork_target = QNetwork(state_size, action_size, seed).to(device)
+        if not self.dueling:
+            self.qnetwork_local = QNetwork(state_size, action_size, seed).to(device)
+            self.qnetwork_target = QNetwork(state_size, action_size, seed).to(device)
+        else:
+            self.qnetwork_local = DuelingDQN(state_size, action_size, seed).to(device)
+            self.qnetwork_target = DuelingDQN(state_size, action_size, seed).to(device)
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
 
         # Replay memory
