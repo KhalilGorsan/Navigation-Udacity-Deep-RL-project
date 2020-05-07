@@ -30,24 +30,24 @@ class QNetwork(nn.Module):
 
 
 class DuelingDQN(nn.Module):
-    def __init__(self, state_size, action_size, fc1_units=128, fc2_units=128, seed=0):
+    def __init__(self, state_size, action_size, seed=0):
         super(DuelingDQN, self).__init__()
         self.input_dim = state_size
         self.output_dim = action_size
 
         self.feature_layer = nn.Sequential(
-            nn.Linear(self.input_dim, fc1_units),
+            nn.Linear(self.input_dim, 128),
             nn.ReLU(),
-            nn.Linear(fc1_units, fc2_units),
+            nn.Linear(128, 128),
             nn.ReLU(),
         )
 
         self.value_stream = nn.Sequential(
-            nn.Linear(fc2_units, 128), nn.ReLU(), nn.Linear(128, 1)
+            nn.Linear(128, 128), nn.ReLU(), nn.Linear(128, 1)
         )
 
         self.advantage_stream = nn.Sequential(
-            nn.Linear(fc2_units, 128), nn.ReLU(), nn.Linear(128, self.output_dim)
+            nn.Linear(128, 128), nn.ReLU(), nn.Linear(128, self.output_dim)
         )
 
     def forward(self, state):
