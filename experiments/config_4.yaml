@@ -3,20 +3,19 @@ agent:
   double: false
   dueling: false
   buffer_size: 1e5
-hyperparameters:
-  lr:
-    mode: annealing
-    value: 5e-3
-    min: 1e-6
-    max: 1e-2
-    rate: 0.99
-  batch_size: 64
-  gamma: 0.99
-  tau: 1e-3
-  update_every: 4
-  eps_greedy:
-    eps_start: 1.0
-    eps_end: 0.001
-    eps_decay: 0.995
-  n_episodes: 2000
-  max_t: 1000
+lr:
+  mode: annealing
+  value: 5e-3
+  min: 1e-6
+  max: 1e-2
+  rate: 0.99
+batch_size: 64
+gamma: 0.99
+tau: 1e-3
+update_every: 4
+eps_greedy:
+  eps_start: 1.0
+  eps_end: 0.001
+  eps_decay: 0.995
+n_episodes: 2000
+max_t: 1000
