@@ -1,6 +1,6 @@
-import yaml
 from pathlib import Path
 
+import yaml
 
 
 def extract_configs(filename: Path) -> dict:

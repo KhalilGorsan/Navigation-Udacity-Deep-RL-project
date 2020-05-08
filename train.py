@@ -1,12 +1,12 @@
-from dqn_agent import Agent
-from core import BananaWrapper
-
 from collections import deque
-from absl import app, flags
+
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import matplotlib.pyplot as plt
+from absl import app, flags
 
+from core import BananaWrapper
+from dqn_agent import Agent
 from utils import extract_configs
 
 flags.DEFINE_multi_string(
@@ -107,4 +107,3 @@ def main(unused_argv):
 if __name__ == "__main__":
     flags.mark_flag_as_required("config")
     app.run(main)
-

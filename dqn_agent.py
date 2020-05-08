@@ -6,7 +6,7 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-from model import QNetwork, DuelingDQN
+from model import DuelingDQN, QNetwork
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 

@@ -32,6 +32,7 @@ class QNetwork(nn.Module):
 class DuelingDQN(nn.Module):
     """Actor Model with two separate streams.
     """
+
     def __init__(self, state_size, action_size, seed=0):
         """
         Params
@@ -45,10 +46,7 @@ class DuelingDQN(nn.Module):
         self.output_dim = action_size
 
         self.feature_layer = nn.Sequential(
-            nn.Linear(self.input_dim, 128),
-            nn.ReLU(),
-            nn.Linear(128, 128),
-            nn.ReLU(),
+            nn.Linear(self.input_dim, 128), nn.ReLU(), nn.Linear(128, 128), nn.ReLU()
         )
         # value stream
         self.value_stream = nn.Sequential(
