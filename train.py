@@ -64,7 +64,7 @@ def dqn(
                     i_episode, np.mean(scores_window)
                 )
             )
-        if np.mean(scores_window) >= 30.0:
+        if np.mean(scores_window) >= 13.0:
             print(
                 "\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
                     i_episode - 100, np.mean(scores_window)
@@ -73,7 +73,7 @@ def dqn(
             torch.save(
                 agent.qnetwork_local.state_dict(), "checkpoint_" + str(label) + ".pth"
             )
-            break
+
     return scores
 
 
@@ -83,7 +83,7 @@ def main(unused_argv):
     configs = extract_configs(*FLAGS.config)
     exp_id = configs["exp_id"]
     training = configs["training"]
-    label = configs["agent"]
+    label = configs["agent"]["name"]
 
     # plot the scores
     fig = plt.figure()
@@ -100,9 +100,8 @@ def main(unused_argv):
     plt.ylabel("Score")
     plt.xlabel("Episode #")
     ax.legend(loc="upper center", shadow=True, fontsize="small")
-    plt.show()
     plt.savefig("experiments/config_" + str(exp_id))
-
+    plt.show()
 
 if __name__ == "__main__":
     flags.mark_flag_as_required("config")
