@@ -3,17 +3,17 @@ agent:
   name: VanillaDQN
   double: false
   dueling: false
-  buffer_size: 1e5
+  buffer_size: 1e5 # replay buffer size
 lr:
   mode: fixed # or annealing
   value: 5e-3
   min: 1e-6
   max: 1e-2
   rate: 0.99
-batch_size: 64
-gamma: 0.99
-tau: 1e-3
-update_every: 4
+batch_size: 64 # minibatch size
+gamma: 0.99 # discount factor
+tau: 1e-3 # for soft update of target parameters
+update_every: 4 # how often to update the network
 training:
   eps_start: 1.0
   eps_end: 0.001
