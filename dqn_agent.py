@@ -107,9 +107,9 @@ class Agent:
             )
         else:
             best_actions = (
-                self.qnetwork_target(next_states).detach().argmax(1).unsqueeze(1)
+                self.qnetwork_local(next_states).detach().argmax(1).unsqueeze(1)
             )
-            Q_targets_next = self.qnetwork_local(next_states).gather(1, best_actions)
+            Q_targets_next = self.qnetwork_target(next_states).gather(1, best_actions)
         # Compute Q targets for current states
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
 
