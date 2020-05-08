@@ -22,6 +22,8 @@ source activate deeprl_udacity
 # Install pre-commit hooks
 pre-commit install
 ```
+Don't forget to add The Banana.app unity environment in the root of the project.
+
 Environment
 --------------------------------------------------------------------------------
 In this project, we will train an agent to navigate (and collect bananas!) in a large,
@@ -58,7 +60,7 @@ python train.py --config=experiments/config.yaml
 
 Experiments
 --------------------------------------------------------------------------------
-We have conducted four experiments with different configs:
+We have conducted five experiments with different configs:
 - Vanilla DQN
 - Dueling DQN
 - Double DQN
