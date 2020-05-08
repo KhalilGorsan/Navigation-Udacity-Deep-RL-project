@@ -6,7 +6,7 @@ agent:
   buffer_size: 1e5 # replay buffer size
 lr:
   mode: fixed # or annealing
-  value: 5e-3
+  value: 5e-4
   min: 1e-6
   max: 1e-2
   rate: 0.99
