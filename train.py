@@ -88,7 +88,6 @@ def main(unused_argv):
     del unused_argv
 
     configs = extract_configs(*FLAGS.config)
-    exp_id = configs["exp_id"]
     training = configs["training"]
     label = configs["agent"]["name"]
 
