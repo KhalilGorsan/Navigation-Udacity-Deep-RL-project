@@ -29,11 +29,11 @@ class Agent:
         self.double = configs["agent"]["double"]
         self.dueling = configs["agent"]["dueling"]
         self.lr = configs["lr"]
-        self.BUFFER_SIZE = configs["agent"]["buffer_size"]
-        self.BATCH_SIZE = configs["batch_size"]
-        self.GAMMA = configs["gamma"]
-        self.TAU = configs["tau"]
-        self.UPDATE_EVERY = configs["update_every"]
+        self.BUFFER_SIZE = int(float(configs["agent"]["buffer_size"]))
+        self.BATCH_SIZE = int(configs["batch_size"])
+        self.GAMMA = float(configs["gamma"])
+        self.TAU = float(configs["tau"])
+        self.UPDATE_EVERY = int(configs["update_every"])
 
         # Q-Network
         if not self.dueling:
@@ -44,13 +44,13 @@ class Agent:
             self.qnetwork_target = DuelingDQN(state_size, action_size, seed).to(device)
 
         # LR mode
-        LR = self.lr["value"]
+        LR = float(self.lr["value"])
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
         if self.lr["mode"] == "annealing":
-            base_lr = self.lr["min"]
-            max_lr = self.lr["max"]
-            self.scheduler = torch.optim.lr_scheduler.CyclicLR(
-                self.optimizer, base_lr=base_lr, max_lr=max_lr
+            LR = float(self.lr["max"])
+            self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
+            self.scheduler = optim.lr_scheduler.ExponentialLR(
+                self.optimizer, gamma=self.GAMMA
             )
 
         # Replay memory
