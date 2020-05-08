@@ -83,8 +83,6 @@ def main(unused_argv):
     configs = extract_configs(*FLAGS.config)
     exp_id = configs["exp_id"]
     training = configs["training"]
-    double = configs["agent"]["double"]
-    dueling = configs["agent"]["dueling"]
     label = configs["agent"]
 
     # plot the scores
@@ -94,9 +92,8 @@ def main(unused_argv):
 
     state_size = env.observation_size
     action_size = env.action_size
-    agent = Agent(
-        state_size=state_size, action_size=action_size, double=double, dueling=dueling
-    )
+    agent = Agent(state_size=state_size, action_size=action_size, configs=configs)
+
     scores = dqn(env=env, agent=agent, label=label, **training)
     ax.plot(np.arange(len(scores)), scores, label=label)
 
