@@ -71,6 +71,12 @@ The results (plots and checkpoints) are under `results` directory.
 
 Evaluation
 --------------------------------------------------------------------------------
-Below is a Double DQN agent navigating on the environment
+Below is a Double DQN agent interacting with the environment. Actions are selected using
+the trained policy.
 
 ![](banana.gif)
+
+You can reproduce it by running the following code:
+```bash
+python evaluate.py --eval_config=experiments/double_dqn.yaml
+```
