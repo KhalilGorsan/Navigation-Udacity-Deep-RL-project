@@ -35,6 +35,8 @@ def dqn(
         eps_end (float): minimum value of epsilon
         eps_decay (float): multiplicative factor (per episode) for decreasing epsilon
     """
+    solved = False
+    previous_score_window = 0
     scores = []  # list containing scores from each episode
     scores_window = deque(maxlen=100)  # last 100 scores
     eps = eps_start  # initialize epsilon
@@ -64,15 +66,19 @@ def dqn(
                     i_episode, np.mean(scores_window)
                 )
             )
-        if np.mean(scores_window) >= 13.0:
+        if np.mean(scores_window) >= 13.0 and not solved:
             print(
-                "Environment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
+                "\rEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
                     i_episode - 100, np.mean(scores_window)
                 )
             )
+            solved = True
+        # Keep the checkpoint with the best score
+        if np.mean(scores_window) > previous_score_window:
             torch.save(
                 agent.qnetwork_local.state_dict(), "checkpoint_" + str(label) + ".pth"
             )
+            previous_score_window = np.mean(scores_window)
 
     return scores
 
