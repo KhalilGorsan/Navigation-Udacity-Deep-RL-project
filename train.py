@@ -68,7 +68,7 @@ def dqn(
             )
         if np.mean(scores_window) >= 13.0 and not solved:
             print(
-                "\rEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
+                "\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}".format(
                     i_episode - 100, np.mean(scores_window)
                 )
             )
@@ -76,7 +76,8 @@ def dqn(
         # Keep the checkpoint with the best score
         if np.mean(scores_window) > previous_score_window:
             torch.save(
-                agent.qnetwork_local.state_dict(), "checkpoint_" + str(label) + ".pth"
+                agent.qnetwork_local.state_dict(),
+                "results/checkpoints/" + str(label) + ".pth",
             )
             previous_score_window = np.mean(scores_window)
 
@@ -106,8 +107,9 @@ def main(unused_argv):
     plt.ylabel("Score")
     plt.xlabel("Episode #")
     ax.legend(loc="upper center", shadow=True, fontsize="small")
-    plt.savefig("experiments/" + str(label) + str(exp_id))
+    plt.savefig("results/plots/" + str(label))
     plt.show()
+
 
 if __name__ == "__main__":
     flags.mark_flag_as_required("config")
