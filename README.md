@@ -71,3 +71,6 @@ The results (plots and checkpoints) are under `results` directory.
 
 Evaluation
 --------------------------------------------------------------------------------
+Below is a Double DQN agent navigating on the environment
+
+![](banana.gif)
