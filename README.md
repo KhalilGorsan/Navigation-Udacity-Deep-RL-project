@@ -24,9 +24,9 @@ pre-commit install
 ```
 Don't forget to add The Banana.app unity environment in the root of the project.
 
-To install an already built the environment for you, and you can download it from one
-of the links below. You need only select the environment that matches your operating
-system:
+To install an already built environment for you, you can download it from one
+of the links below. You need only to select the environment that matches your operating
+system and unzip it:
 
 - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
 - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
