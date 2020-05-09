@@ -5,6 +5,9 @@ from unityagents import UnityEnvironment
 
 
 class BananaWrapper:
+    """Banana Unity Environment Wrapper.
+    """
+
     def __init__(self, file_name: Path):
         self.env = UnityEnvironment(file_name)
         # Get the default brain
@@ -33,4 +36,3 @@ class BananaWrapper:
     @property
     def observation_size(self):
         return self.brain.vector_observation_space_size
-

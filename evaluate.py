@@ -1,10 +1,12 @@
 # load the weights from file
+import time
+
 import torch
+from absl import app, flags
+
+from core import BananaWrapper
 from dqn_agent import Agent
 from utils import extract_configs
-from core import BananaWrapper
-from absl import app, flags
-import time
 
 flags.DEFINE_multi_string(
     "eval_config", None, "Filename containing the config for dqn agent."
@@ -43,6 +45,7 @@ def main(unused_argv):
 
     # close env
     env.close()
+
 
 if __name__ == "__main__":
     flags.mark_flag_as_required("eval_config")
