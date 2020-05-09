@@ -24,6 +24,15 @@ pre-commit install
 ```
 Don't forget to add The Banana.app unity environment in the root of the project.
 
+To install an already built the environment for you, and you can download it from one
+of the links below. You need only select the environment that matches your operating
+system:
+
+- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
+- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
+- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
+- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+
 Environment
 --------------------------------------------------------------------------------
 In this project, we will train an agent to navigate (and collect bananas!) in a large,
